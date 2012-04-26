@@ -1,0 +1,17 @@
+<h2>Предстоящие события</h2>
+<ul>
+
+  <% @welcome_events.each do |article| %>
+      <li>
+        <%= link_to image_tag(article.preview.url(:small), :width => "61", :height => "59"), article, :class => "flag" %>
+        <p class="when"><%= article.created_at.strftime("%B, %d") %></p>
+        <!--October, 26–28-->
+        <h4><a href="#"><%= article.title %></a></h4>
+
+        <p class="where"><%= article.short_description %></p>
+      </li>
+  <% end %>
+</ul>
+<div class="show-all">
+  <%= link_to "Все события", "/events" %>
+</div>

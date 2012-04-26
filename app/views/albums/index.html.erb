@@ -1,0 +1,53 @@
+<%#= title(t('albums.index.title')) %>
+<div class="body">
+  <ul class="second-top-menu">
+    <% @menu_categories.each do |category| %>
+        <li class="<%= 'active' if category == @category %>">
+          <%= link_to category.title, "/photo/#{category.short_url}" %>
+          <%= "/" if category != @menu_categories.last %>
+        </li>
+    <% end %>
+  </ul>
+  <div class="column-left">
+    <p><%= link_to(t('helpers.submit.create', :model => t('activerecord.models.album')), new_album_path) if can?(:create, @albums) %></p>
+
+    <ul class="b-interview">
+      <% @albums.each do |album| %>
+          <li>
+            <%= image_tag album.preview.url(:list), :class => "pic" %>
+            <%= link_to "Смотреть", album, :class => "watch" %>
+            <div class="title">
+              <h4><%= album.title %></h4>
+
+              <p><%= album.short_description %></p>
+
+              <div class="b-meta">
+                <!--<span class="section">Designer</span>-->
+                <%= link_to(t('backend.actions.edit'), edit_album_path(album)) if can?(:edit, album) %>
+                <%= link_to(t('backend.actions.destroy'), album, :confirm => t('backend.actions.are_you_sure'), :method => :delete) if can?(:destroy, album) %>
+                <%= link_to raw("<i></i>"), album, :class => "i-comments" %>
+              </div>
+            </div>
+          </li>
+      <% end %>
+    </ul>
+
+    <!--<div class="b-paging">-->
+    <!--<a href="#" class="prev">&lt;</a>-->
+    <!--<span>1</span>-->
+    <!--<a href="#">2</a>-->
+    <!--<a href="#">3</a>-->
+    <!--<a href="#">4</a>-->
+    <!--<a href="#">5</a>-->
+    <!--<a href="#">6</a>-->
+    <!--<a href="#">7</a>-->
+    <!--<a href="#" class="next">&gt;</a>-->
+    <!--</div>-->
+  </div>
+  <div class="column-right">
+    <div class="b-right-banner">
+      <%= render "layouts/like_box" %>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>

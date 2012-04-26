@@ -1,0 +1,12 @@
+body,
+.wrapper {
+	background-color: #434343;
+}
+
+.top-menu li {
+	background-image: url('../i/top-menu-dark-separator.png');
+}
+.top-menu li a.top-menu-item {
+	background-image: url('../i/top-menu-dark.png');
+}
+

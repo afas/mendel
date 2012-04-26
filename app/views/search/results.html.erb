@@ -1,0 +1,64 @@
+<div class="body">
+  <ul class="second-top-menu">
+    <% @menu_categories.each do |category| %>
+        <li class="<%= 'active' if category == @category %>">
+          <%= link_to category.title, category.short_url %>
+          <%= "/" if category != @menu_categories.last %>
+        </li>
+    <% end %>
+  </ul>
+  <div class="column-left">
+
+    <%= link_to(t('backend.actions.edit'), edit_category_path(@category)) if can?(:edit, @category) %>
+    <%= link_to(t('backend.actions.destroy'), @category, :confirm => t('backend.actions.are_you_sure'), :method => :delete) if can?(:destroy, @category) %>
+
+    <%= link_to(t('helpers.submit.create', :model => t('activerecord.models.article')), new_article_path) if can?(:create, @articles) %>
+
+    <div class="b-news-all">
+      <% @articles.each_with_index do |article, index| %>
+          <% if (index % 4 == 0) && index != 0 %>
+              <dl class="b-news-long b-news-super">
+                <dt>
+                  <%= link_to image_tag(article.preview.url(:big)), article %>
+                </dt>
+                <dd>
+                  <h3><%= article.title %></h3>
+
+                  <p>
+                    <%= article.short_description %>
+                  </p>
+
+                  <div class="b-meta">
+                    <%= link_to raw("<i></i>"), article, :class => "i-comments" %>
+                  </div>
+                </dd>
+              </dl>
+          <% else %>
+              <dl class="b-news-long">
+                <dt>
+                  <%= link_to image_tag(article.preview.url(:list)), article %>
+                </dt>
+                <dd>
+                  <h3><%= article.title %></h3>
+
+                  <p>
+                    <%= article.short_description %>
+                  </p>
+
+                  <div class="b-meta">
+                    <%= link_to raw("<i></i>"), article, :class => "i-comments" %>
+                  </div>
+                </dd>
+              </dl>
+          <% end %>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="column-right">
+    <div class="b-right-banner">
+      <%= render "layouts/like_box" %>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>

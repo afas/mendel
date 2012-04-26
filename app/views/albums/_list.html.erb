@@ -1,0 +1,25 @@
+<% content_for(:head) do %>
+    <%= javascript_include_tag 'jquery.fancybox-1.3.4.pack', 'jquery.mousewheel-3.0.4.pack' %>
+    <%= stylesheet_link_tag 'jquery.fancybox-1.3.4' %>
+<% end %>
+
+<ul class="albums-list">
+  <% @article.album.album_images.each.each do |image| %>
+      <li>
+        <%= link_to image_tag(image.image.url(:list)), image.image.url(:full), :rel => 'album', :alt => @article.album.title %>
+      </li>
+  <% end %>
+</ul>
+
+<div class="clear fixed"></div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("a[rel=album]").fancybox({
+            'transitionIn'        : 'none',
+            'transitionOut'        : 'none',
+            'titlePosition'     : 'over'
+        });
+    });
+</script>

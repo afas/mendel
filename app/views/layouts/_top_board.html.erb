@@ -1,0 +1,32 @@
+<div class="top-board">
+
+  <% if user_signed_in? %>
+      Вы вошли как <%= link_to current_user.full_name, "/users/edit" %>. Не вы?
+      <%= link_to "Покинуть сайт", destroy_user_session_path, :method => :delete %>
+  <% else %>
+      <div class="auth">
+        <form action="/users/sign_in" method="post">
+          <fieldset>
+            <input class="text placeholder" placeholder="email" id="user_email" type="email" name="user[email]"/>
+            <input type="password" id="q-pass" class="password placeholder" placeholder="Password" name="user[password]"/>
+            <!--<label for="user_remember_me">Remember me</label>-->
+            <!--<input type="hidden" value="0" name="user[remember_me]">-->
+            <!--<input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">-->
+            <input type="submit" class="submit wf-button" value="Войти"/>
+          </fieldset>
+        </form>
+      </div>
+      <%= link_to "Регистрация", "/users/sign_up", :class => "reg" %>
+  <% end %>
+
+
+  <div class="search">
+    <form action="/search/" method="get" >
+      <fieldset>
+        <input type="text" id="q_search" name="q_search" class="text placeholder" placeholder="Искать на сайте"/>
+        <input type="submit" class="submit wf-button" value="&rarr;"/>
+      </fieldset>
+    </form>
+  </div>
+  <div class="clear"></div>
+</div>

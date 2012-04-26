@@ -1,0 +1,72 @@
+<h2>Профиль пользователя</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
+    <%= devise_error_messages! %>
+
+    <% if @user.avatar_file_name? %>
+        <%= image_tag @user.avatar.url(:medium) %>
+    <% end %>
+
+    <div class="field">
+      <%= f.label "Аватар" %>
+      <br/>
+      <%= f.file_field :avatar %>
+    </div>
+
+    <div>
+      <%= f.label "Имя" %>
+      <br/>
+      <%= f.text_field :name %>
+    </div>
+
+    <div>
+      <%= f.label "Отчество" %>
+      <br/>
+      <%= f.text_field :secondname %>
+    </div>
+
+    <div>
+      <%= f.label "Фамилия" %>
+      <br/>
+      <%= f.text_field :surname %>
+    </div>
+
+
+    <div>
+      <%= f.label "Факультет" %>
+      <br/>
+      <%= f.collection_select(:faculty, Faculty.collection(), :cut, :name, :prompt => true) %>
+    </div>
+
+    <div>
+      <%= f.label "Курс" %>
+      <br/>
+      <%= f.collection_select(:course, Course.collection(), :cut, :name, :prompt => true) %>
+    </div>
+
+    <div>
+      <%= f.label "Мои интересы, призвание" %>
+      <br/>
+      <%= f.text_area :about, :rows => 8, :cols => 55 %>
+    </div>
+
+    <div><%= f.label :email %>
+      <br/>
+      <%= f.email_field :email %></div>
+
+    <div><%= f.label :password %> <i>(Если хотите изменить пароль - введите новый)</i><br/>
+      <%= f.password_field :password %></div>
+
+    <div><%= f.label :password_confirmation %>
+      <br/>
+      <%= f.password_field :password_confirmation %></div>
+
+    <div><%= f.label :current_password %> <i>(введите для сохранения изменений в профиле)</i><br/>
+      <%= f.password_field :current_password %></div>
+
+    <div><%= f.submit "Сохранить изменения" %></div>
+<% end %>
+
+<!--:name, :secondname, :surname, :faculty, :kafedra, :course, :about,:avatar-->
+
+<%= link_to "Back", :back %>

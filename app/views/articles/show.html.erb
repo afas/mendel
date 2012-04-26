@@ -1,0 +1,45 @@
+<%#= @article.album_id %>
+<%#= @article.user_id %>
+
+<div class="body">
+  <ul class="second-top-menu">
+    <% @menu_categories.each do |category| %>
+        <li class="<%= 'active' if category == @category %>">
+          <%= link_to category.title, "/#{category.short_url}" %>
+          <%= "/" if category != @menu_categories.last %>
+        </li>
+    <% end %>
+  </ul>
+  <div class="column-left">
+
+    <%= link_to(t('backend.actions.edit'), edit_article_path(@article)) if can?(:edit, @article) %>
+    <%= link_to(t('backend.actions.destroy'), @article, :confirm => t('backend.actions.are_you_sure'), :method => :delete) if can?(:destroy, @article) %>
+
+    <h1><%= @article.title %></h1>
+
+    <p>
+      <%#= image_tag @article.preview.url(:big_inner) %>
+      <%= image_tag @article.preview.url(:big) %>
+    </p>
+
+    <p>
+      <%#= image_tag @article.preview.url(:big_inner) %>
+      <%= @article.short_description %>
+    </p>
+
+    <%= render "albums/list" if @article.album_id %>
+
+    <div class="text">
+      <%= raw @article.content %>
+    </div>
+
+    <%= render "layouts/fb_comments" %>
+
+  </div>
+  <div class="column-right">
+    <div class="b-right-banner">
+      <%= render "layouts/like_box" %>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>

@@ -1,0 +1,45 @@
+<% content_for(:head) do %>
+    <%= javascript_include_tag "jquery.jcarousel.min" %>
+<% end %>
+
+<div class="advert-slider">
+  <ul id="album-slider">
+    <% @welcome_albums.each do |album| %>
+        <li>
+          <%= link_to image_tag(album.preview.url(:slider)), album %>
+        </li>
+    <% end %>
+  </ul>
+</div>
+<!--<a class="nav prev" href="#">Назад</a>-->
+<!--<a class="nav next" href="#">Вперед</a>-->
+
+<script type="text/javascript">
+    function mycarousel_initCallback(carousel) {
+        // Disable autoscrolling if the user clicks the prev or next button.
+        carousel.buttonNext.bind('click', function() {
+            carousel.startAuto(0);
+        });
+
+        carousel.buttonPrev.bind('click', function() {
+            carousel.startAuto(0);
+        });
+
+        // Pause autoscrolling if the user moves with the cursor over the clip.
+        carousel.clip.hover(function() {
+            carousel.stopAuto();
+        }, function() {
+            carousel.startAuto();
+        });
+    }
+    ;
+
+    jQuery(document).ready(function() {
+        jQuery('#album-slider').jcarousel({
+            auto: 3,
+            scroll: 1,
+            wrap: 'last',
+            initCallback: mycarousel_initCallback
+        });
+    });
+</script>

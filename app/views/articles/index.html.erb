@@ -1,0 +1,29 @@
+<%= title(t('articles.index.title')) %>
+
+<table>
+  <tr>
+    <th><%= t('activerecord.attributes.article.title') %></th>
+    <th><%= t('activerecord.attributes.article.short_description') %></th>
+    <th><%= t('activerecord.attributes.article.album_id') %></th>
+    <th><%= t('activerecord.attributes.article.user_id') %></th>
+    <th><%= t('activerecord.attributes.article.content') %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @articles.each do |article| %>
+  <tr>
+    <td><%= article.title %></td>
+    <td><%= article.short_description %></td>
+    <td><%= article.album_id %></td>
+    <td><%= article.user_id %></td>
+    <td><%= article.content %></td>
+    <td><%= link_to(t('backend.actions.show'), article) if can?(:show, article) %></td>
+    <td><%= link_to(t('backend.actions.edit'), edit_article_path(article))  if can?(:edit, article) %></td>
+    <td><%= link_to(t('backend.actions.destroy'), article, :confirm => t('backend.actions.are_you_sure'), :method => :delete) if can?(:destroy, article) %></td>
+  </tr>
+<% end %>
+</table>
+
+<p><%= link_to(t('helpers.submit.create', :model => t('activerecord.models.article')), new_article_path) if can?(:create, @articles) %></p>

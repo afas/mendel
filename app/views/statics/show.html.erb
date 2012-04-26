@@ -1,0 +1,26 @@
+<div class="body">
+  <ul class="second-top-menu">
+    <% @menu_categories.each do |category| %>
+        <li class="<%= 'active' if category == @category %>">
+          <%= link_to category.title, "/#{category.short_url}" %>
+          <%= "/" if category != @menu_categories.last %>
+        </li>
+    <% end %>
+  </ul>
+  <div class="column-left">
+
+    <%= link_to(t('backend.actions.edit'), edit_static_path(@static)) if can?(:edit, @static) %>
+    <%= link_to(t('backend.actions.destroy'), @static, :confirm => t('backend.actions.are_you_sure'), :method => :delete) if can?(:destroy, @static) %>
+    <h1><%= @static.title %></h1>
+
+    <div class="text">
+      <%= raw @static.content %>
+    </div>
+  </div>
+  <div class="column-right">
+    <div class="b-right-banner">
+      <%= render "layouts/like_box" %>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>

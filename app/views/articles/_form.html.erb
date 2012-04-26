@@ -1,0 +1,162 @@
+<% content_for(:head) do %>
+    <script src="http://aloha-editor.org/aloha/aloha/aloha.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="http://aloha-editor.org/aloha/aloha/css/aloha.css?v=0.9.3" media="all">
+    <link rel="stylesheet" type="text/css" href="http://aloha-editor.org/aloha/aloha/deps/extjs/resources/css/ext-all.css?v=0.9.3" media="all">
+    <link rel="stylesheet" type="text/css" href="http://aloha-editor.org/aloha/aloha/deps/extjs/resources/css/xtheme-gray.css?v=0.9.3" media="all">
+    <link rel="stylesheet" type="text/css" href="http://aloha-editor.org/aloha/aloha/deps/prettyPhoto/resources/css/prettyPhoto.css?v=0.9.3" media="all">
+    <link rel="stylesheet" type="text/css" href="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.Table/resources/table.css?v=0.9.3" media="all">
+    <link rel="stylesheet" type="text/css" href="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.Link/css/Link.css?v=0.9.3" media="all">
+    <link rel="stylesheet" type="text/css" href="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.HighlightEditables/css/HighlightEditables.css?v=0.9.3" media="all">
+    <link rel="stylesheet" type="text/css" href="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.LinkChecker/css/LinkChecker.css?v=0.9.3" media="all">
+    <script src="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.Format/plugin.js" type="text/javascript"></script>
+    <script src="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.Table/plugin.js" type="text/javascript"></script>
+    <script src="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.List/plugin.js" type="text/javascript"></script>
+    <script src="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.Link/plugin.js" type="text/javascript"></script>
+    <script src="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.HighlightEditables/plugin.js" type="text/javascript"></script>
+    <script src="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.TOC/plugin.js" type="text/javascript"></script>
+    <script src="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.Link/delicious.js" type="text/javascript"></script>
+    <script src="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.Link/LinkList.js" type="text/javascript"></script>
+    <script src="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.Paste/plugin.js" type="text/javascript"></script>
+    <script src="http://aloha-editor.org/aloha/aloha/plugins/com.gentics.aloha.plugins.Paste/wordpastehandler.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" media="screen" href="http://kernest.com/fonts/komika-axis.css">
+<% end %>
+
+<%= form_for(@article, :builder => StarsFormBuilder, :html => {:multipart => true}) do |f| %>
+    <%= render 'shared/error_messages', :target => @article %>
+
+
+    <div class="field">
+      <%= f.hidden_field :user_id, :value => current_user.id if user_signed_in? %>
+    </div>
+
+
+    <div class="field">
+      <%= f.label :title %>
+      <br/>
+      <%= f.text_field :title %>
+    </div>
+
+    <% if @article.preview_file_name? %>
+        <%= image_tag @article.preview.url(:list) %>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :preview %>
+      <br/>
+      <%= f.file_field :preview %>
+    </div>
+
+    <div class="field">
+      <%= f.label :category_id %>
+      <br/>
+      <%= f.collection_select(:category_id, Category.all, :id, :title, :include_blank => "Не выбрана ...") %>
+    </div>
+
+    <div class="field">
+      <%= f.label :short_description %>
+      <br/>
+      <%= f.text_area :short_description, :rows => 5, :cols => 34 %>
+    </div>
+
+    <div class="field">
+      <%= f.label :to_index %>
+      <br/>
+      <%= f.check_box :to_index %>
+    </div>
+
+    <div class="field">
+      <%= f.label :album_id %>
+      <br/>
+      <%= f.collection_select(:album_id, Album.all, :id, :title, :include_blank => "Не выбран ...") %>
+    </div>
+
+
+    <div class="field">
+      <%= f.label :content %>
+      <br/>
+      <%= f.text_area :content %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
+
+<script type="text/javascript">
+    GENTICS.Aloha.settings = {
+        logLevels: {'error': true, 'warn': true, 'info': true, 'debug': false},
+        errorhandling : false,
+        ribbon: false,
+        "i18n": {
+            // you can either let the system detect the users language (set acceptLanguage on server)
+            // In PHP this would would be '&lt;?=$_SERVER['HTTP_ACCEPT_LANGUAGE']?&gt;' resulting in
+            // "acceptLanguage": 'de-de,de;q=0.8,it;q=0.6,en-us;q=0.7,en;q=0.2'
+            // or set current on server side to be in sync with your backend system
+            "current": "ru"
+        },
+        "repositories": {
+            "com.gentics.aloha.repositories.LinkList": {
+                data: [
+                    { name: 'Aloha Developers Wiki', url:'http://www.aloha-editor.com/wiki', type:'website', weight: 0.50 },
+                    { name: 'Aloha Editor - The HTML5 Editor', url:'http://aloha-editor.com', type:'website', weight: 0.90  },
+                    { name: 'Aloha Demo', url:'http://www.aloha-editor.com/demos.html', type:'website', weight: 0.75  },
+                    { name: 'Aloha Wordpress Demo', url:'http://www.aloha-editor.com/demos/wordpress-demo/index.html', type:'website', weight: 0.75  },
+                    { name: 'Aloha Logo', url:'http://www.aloha-editor.com/images/aloha-editor-logo.png', type:'image', weight: 0.10  }
+                ]
+            }
+        },
+        "plugins": {
+            "com.gentics.aloha.plugins.Format": {
+                // all elements with no specific configuration get this configuration
+                config : [ 'b', 'i','sub','sup', 'p', 'title', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre', 'removeFormat'],
+                editables : {
+                    // no formatting allowed for title
+                    '#title'    : [ ],
+                }
+            },
+            "com.gentics.aloha.plugins.List": {
+                // all elements with no specific configuration get an UL, just for fun :)
+                config : [ 'ul' , 'ol'],
+                editables : {
+                    // Even if this is configured it is not set because OL and UL are not allowed in H1.
+                    '#title'    : [  ],
+                }
+            },
+            "com.gentics.aloha.plugins.Link": {
+                // all elements with no specific configuration may insert links
+                config : [ 'a' ],
+                editables : {
+                    // No links in the title.
+                    '#title'    : [  ]
+                },
+                // all links that match the targetregex will get set the target
+                // e.g. ^(?!.*aloha-editor.com).* matches all href except aloha-editor.com
+                targetregex : '^(?!.*aloha-editor.com).*',
+                // this target is set when either targetregex matches or not set
+                // e.g. _blank opens all links in new window
+                target : '_blank',
+                // the same for css class as for target
+                cssclassregex : '^(?!.*aloha-editor.com).*',
+                cssclass : 'aloha',
+                // use all resources of type website for autosuggest
+                objectTypeFilter: ['website'],
+                // handle change of href
+                onHrefChange: function(obj, href, item) {
+                    if (item) {
+                        jQuery(obj).attr('data-name', item.name);
+                    } else {
+                        jQuery(obj).removeAttr('data-name');
+                    }
+                }
+            },
+            "com.gentics.aloha.plugins.Table": {
+                // all elements with no specific configuration are not allowed to insert tables
+                config : [ 'table' ]
+            }
+        }
+    };
+
+    $(document).ready(function() {
+        $('#article_content').aloha();
+    });
+
+</script>

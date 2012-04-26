@@ -1,0 +1,35 @@
+<div class="b-news">
+  <h3 class="block-title">Новости</h3>
+  <% @welcome_articles[0..1].each do |article| %>
+      <dl class="b-news-long">
+        <dt>
+          <%= link_to image_tag(article.preview.url(:list)), article %>
+        </dt>
+        <dd>
+          <h3><%= article.title %></h3>
+
+          <p>
+            <%= article.short_description %>
+          </p>
+
+          <div class="b-meta">
+            <%= link_to raw("<i></i>"), article, :class => "i-comments" %>
+          </div>
+        </dd>
+      </dl>
+  <% end if @welcome_articles.size > 0 %>
+
+  <ul class="b-news-short">
+    <% @welcome_articles[2..5].each do |article| %>
+        <li class="<%= 'first' if article == @welcome_articles[2] %>">
+          <%= link_to image_tag(article.preview.url(:small)), article %>
+          <p>
+            <%= article.short_description %>
+          </p>
+        </li>
+    <% end if @welcome_articles.size > 2 %>
+    <li class="show-all">
+      <%= link_to "Показать все", "/news" %>
+    </li>
+  </ul>
+</div>
