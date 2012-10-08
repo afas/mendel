@@ -1,7 +1,7 @@
 <div class="top-board">
 
   <% if user_signed_in? %>
-      Вы вошли как <%= link_to current_user.full_name, "/users/edit" %>. Не вы?
+      Вы вошли как <%= link_to current_user.email, "/users/edit" %>. Не вы?
       <%= link_to "Покинуть сайт", destroy_user_session_path, :method => :delete %>
   <% else %>
       <div class="auth">

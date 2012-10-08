@@ -6,18 +6,7 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 75%;
     line-height: 1.5;
-    text-align: center;
 }
-
-button,
-input,
-textarea,
-select {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 1em;
-}
-
-/* typography */
 a {
     color: #222;
     text-decoration: underline;
@@ -28,13 +17,6 @@ a:focus,
 a:active {
     color: #000 !important;
     text-decoration: none;
-}
-
-.mendel-logo {
-    position: absolute;
-    left: 100px;
-    top: 21px;
-    z-index: 100;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -52,112 +34,6 @@ em, dfn, tfoot {
 
 sup, sub {
     line-height: 0;
-}
-
-/* helpers */
-.clear {
-    clear: both;
-    display: block;
-    font-size: 0;
-    height: 0;
-    line-height: 0;
-    overflow: hidden;
-    visibility: hidden;
-}
-
-/* common */
-.column-left {
-    float: left;
-    width: 726px;
-}
-
-.column-left .text {
-    text-indent: 34px;
-
-    /*-webkit-column-width: 230px;*/
-    /*-webkit-column-gap: 34px;*/
-    /*-moz-column-width: 230px;*/
-    /*-moz-column-gap: 34px;*/
-    /*width: 100%;*/
-    /*margin: 0 auto;*/
-}
-
-.column-left h1 {
-    padding: 13px 0;
-}
-
-.column-right {
-    float: right;
-    width: 238px;
-}
-
-.show-all {
-    text-align: right;
-}
-
-.b-meta {
-    overflow: hidden;
-    position: relative;
-    text-align: right;
-}
-
-.b-meta .i-comments {
-    font-size: 10px;
-    padding-left: 16px;
-    position: relative;
-}
-
-.b-meta .i-comments i {
-    background: url('/images/icons.png') no-repeat;
-    crop: rect(auto, 12px, auto, 13px);
-    height: 12px;
-    left: 0;
-    position: absolute;
-    top: 2px;
-    width: 13px;
-}
-
-.b-meta .section {
-    color: #947022;
-    float: left;
-    font-size: 10px;
-    line-height: 21px;
-    text-decoration: none;
-    text-transform: uppercase;
-}
-
-.b-paging {
-    font-size: 11px;
-    line-height: 12px;
-    text-align: right;
-}
-
-.b-paging a,
-.b-paging span {
-    border: 1px solid #7f7f7f;
-    color: #7f7f7f;
-    padding: 0 5px;
-    text-decoration: none;
-}
-
-.b-paging a.prev,
-.b-paging a.next {
-    background: #000;
-    border: 1px solid #000;
-    color: #fff;
-    padding: 0 3px;
-}
-
-.b-paging span,
-.b-paging a:hover {
-    border-color: #000;
-    color: #000 !important;
-}
-
-.b-paging a.prev:hover,
-.b-paging a.next:hover {
-    background: #000;
-    color: #fff !important;
 }
 
 /* titles */

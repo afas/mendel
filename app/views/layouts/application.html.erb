@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="/stylesheets/ie.css" type="text/css" media="all"/>
   <![endif]-->
 
-  <%= javascript_include_tag :defaults, 'jquery.placeholder-1.0.1', 'main' %>
+  <%= javascript_include_tag :defaults, 'jquery.placeholder-1.0.1' %>
   <%= csrf_meta_tag %>
   <%= yield :head %>
 </head>
@@ -24,7 +24,6 @@
   <!--</div>-->
   <div class="header">
     <a class="logo" href="/" title="<%= yield(:title).blank? ? '' : "#{yield(:title)} :: " %><%= raw t('site_name') %>"><img src="/images/logo.png" alt="World Fashion"/></a>
-
     <%#= render "layouts/mendel" %>
     <%= render "layouts/top_board" %>
     <%= render "layouts/main_menu" %>

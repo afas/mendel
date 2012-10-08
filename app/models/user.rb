@@ -6,20 +6,18 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :name, :secondname, :surname, :faculty, :kafedra, :course, :about, :avatar
-
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :secondname, :surname, :faculty, :kafedra, :course, :about, :avatar
 
   has_attached_file :avatar,
                     :styles => {
                         :small => '55x55#',
                         :medium => '144x144#'
                     },
-                    :default_url => '/user_avatar/default.png',
-                    :url => '/user_avatar/:id/:style_:basename.:extension'
+                    :default_url => '/users/avatar/default.png',
+                    :url => '/users/avatar/:id/:style_:basename.:extension'
 
-  #validates_attachment_presence :preview
-  validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png'], :message => "Неверный формат файла изображения."
+  #validates_attachment_presence :avatar
+  #validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png'], :message => "Неверный формат файла изображения."
 
   belongs_to :role
 

@@ -10,6 +10,7 @@ class AddFieldsToUser < ActiveRecord::Migration
     add_column :users, :avatar_file_name, :string
     add_column :users, :avatar_content_type, :string
     add_column :users, :avatar_file_size, :string
+    add_column :users, :avatar_updated_at, :datetime
   end
 
   def self.down
@@ -23,5 +24,6 @@ class AddFieldsToUser < ActiveRecord::Migration
     remove_column :avatar_file_name
     remove_column :avatar_content_type
     remove_column :avatar_file_size
+    remove_column :users, :avatar_updated_at
   end
 end
