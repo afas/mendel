@@ -14,6 +14,7 @@ class StaticsController < ApplicationController
   # GET /statics/1.xml
   def show
     @static = Static.find_by_short_url(params[:short_url]) if params[:short_url]
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @static }

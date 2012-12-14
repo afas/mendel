@@ -1,0 +1,14 @@
+<div class="b-fblogs">
+  <h3>Компании</h3>
+  <ul>
+    <% @welcome_companies.each do |company| %>
+        <li>
+          <h4 style="background-image: url('<%= company.logo.url(:small) %>');"><%= link_to company.name, company %></h4>
+          <p><%= company.description %></p>
+        </li>
+    <% end %>
+  </ul>
+  <div class="show-all">
+    <%= link_to "Все (#{Company.all.size})", companies_path %>
+  </div>
+</div>

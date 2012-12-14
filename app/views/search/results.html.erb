@@ -8,12 +8,6 @@
     <% end %>
   </ul>
   <div class="column-left">
-
-    <%= link_to(t('backend.actions.edit'), edit_category_path(@category)) if can?(:edit, @category) %>
-    <%= link_to(t('backend.actions.destroy'), @category, :confirm => t('backend.actions.are_you_sure'), :method => :delete) if can?(:destroy, @category) %>
-
-    <%= link_to(t('helpers.submit.create', :model => t('activerecord.models.article')), new_article_path) if can?(:create, @articles) %>
-
     <div class="b-news-all">
       <% @articles.each_with_index do |article, index| %>
           <% if (index % 4 == 0) && index != 0 %>
@@ -29,7 +23,7 @@
                   </p>
 
                   <div class="b-meta">
-                    <%= link_to raw("<i></i>"), article, :class => "i-comments" %>
+                    <%= link_to raw("<i></i>"), "#{article_path(article)}#comments", :class => "i-comments" %>
                   </div>
                 </dd>
               </dl>
@@ -46,7 +40,7 @@
                   </p>
 
                   <div class="b-meta">
-                    <%= link_to raw("<i></i>"), article, :class => "i-comments" %>
+                    <%= link_to raw("<i></i>"), "#{article_path(article)}#comments", :class => "i-comments" %>
                   </div>
                 </dd>
               </dl>

@@ -1,16 +1,15 @@
-<h2>Предстоящие события</h2>
-<ul>
-
-  <% @welcome_events.each do |article| %>
-      <li>
-        <%= link_to image_tag(article.preview.url(:small), :width => "61", :height => "59"), article, :class => "flag" %>
-        <p class="when"><%= Russian::strftime(article.created_at, "%B, %d") %></p>
-        <h4><a href="#"><%= article.title %></a></h4>
-
-        <p class="where"><%= article.short_description %></p>
-      </li>
-  <% end %>
-</ul>
-<div class="show-all">
-  <%= link_to "Все события", "/events" %>
+<div class="b-modelagencies">
+  <h3>Лекции/Гранты</h3>
+  <ul>
+    <% @welcome_events.each do |article| %>
+        <li>
+          <%= link_to image_tag(article.preview.url(:small), :width => "106", :height => "103"), article %>
+          <p><b><%= Russian::strftime(article.created_at, "%B, %d") %></b></p>
+          <p class="grants-title"><%= article.title %></p>
+        </li>
+    <% end %>
+  </ul>
+  <div class="show-all">
+    <%= link_to "Все (#{Article.where("category_id = 8").all.size})", "/events" %>
+  </div>
 </div>

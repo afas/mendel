@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
 
   def main_menu
     @menu_categories = Category.all
-    @menu_statics = Static.all
+    @menu_statics = Static.first_level
   end
 end

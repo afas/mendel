@@ -1,13 +1,27 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.10'
-gem 'jquery-rails'
+gem 'rails', '3.2.8'
+
+#gem 'geocoder'
+#gem 'omniauth'
+#gem 'proxylocal'
+
 gem 'cancan'
 gem 'devise'
-#gem 'geocoder'
-#gem 'gmaps4rails'
-gem "marilyn", "0.0.2"
-gem 'russian'
+gem 'gmaps4rails'
+gem 'google-spreadsheet-ruby'
 gem 'paperclip'
+gem 'russian'
 gem 'sqlite3'
 gem 'will_paginate'
+
+gem 'therubyracer'
+gem 'execjs'
+
+group :assets do
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
+end
+
+gem 'jquery-rails'

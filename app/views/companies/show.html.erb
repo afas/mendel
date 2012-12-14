@@ -1,0 +1,32 @@
+<div class="body">
+  <% if can?(:manage, :all) %>
+      <ul class="second-top-menu admin-menu">
+        <li><%= link_to(t('backend.actions.edit'), edit_company_path(@company)) %> /</li>
+        <li><%= link_to(t('backend.actions.destroy'), @company, :confirm => t('backend.actions.are_you_sure'), :method => :delete) %></li>
+      </ul>
+  <% end %>
+
+  <div class="column-left">
+    <%= image_tag @company.logo.url(:list) %>
+
+    <h1><%= @company.name %>
+      <span>
+        <%#= link_to raw("&#9668;"), company_path(@company.previous), :title => "Назад" unless @сompany.previous.nil? %>
+        <%#= link_to raw("&#9658;"), company_path(@company.next), :title => "Смотреть дальше" unless @company.next.nil? %>
+      </span>
+    </h1>
+
+    <p>
+      <%= raw @company.about %>
+    </p>
+
+    <%= render "layouts/fb_comments" %>
+
+  </div>
+  <div class="column-right">
+    <div class="b-right-banner">
+      <%= render "layouts/like_box" %>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>

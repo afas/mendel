@@ -7,12 +7,17 @@
         </li>
     <% end %>
   </ul>
+
+  <% if can?(:manage, :all) %>
+      <ul class="second-top-menu admin-menu">
+        <li><%= link_to(t('helpers.submit.create', :model => t('activerecord.models.article')), new_article_path) %> /</li>
+        <li><%= link_to(t('helpers.submit.create', :model => t('activerecord.models.category')), new_category_path) %> /</li>
+        <li><%= link_to(t('helpers.submit.edit', :model => t('activerecord.models.category')), edit_category_path(@category)) %> /</li>
+        <li><%= link_to(t('helpers.submit.destroy', :model => t('activerecord.models.category')), @category, :confirm => t('backend.actions.are_you_sure'), :method => :delete) %></li>
+      </ul>
+  <% end %>
+
   <div class="column-left">
-
-    <%= link_to(t('backend.actions.edit'), edit_category_path(@category)) if can?(:edit, @category) %>
-    <%= link_to(t('backend.actions.destroy'), @category, :confirm => t('backend.actions.are_you_sure'), :method => :delete) if can?(:destroy, @category) %>
-
-    <%= link_to(t('helpers.submit.create', :model => t('activerecord.models.article')), new_article_path) if can?(:create, @articles) %>
 
     <div class="b-news-all">
       <% @articles.each_with_index do |article, index| %>
@@ -54,18 +59,22 @@
       <% end %>
       <div class="clear"></div>
     </div>
-    <!--<div class="b-paging">-->
-    <!--<a href="#" class="prev">&lt;</a>-->
-    <!--<span>1</span>-->
-    <!--<a href="#">2</a>-->
-    <!--<a href="#">3</a>-->
-    <!--<a href="#">4</a>-->
-    <!--<a href="#">5</a>-->
-    <!--<a href="#">6</a>-->
-    <!--<a href="#">7</a>-->
-    <!--<a href="#" class="next">&gt;</a>-->
-    <!--</div>-->
+
+    <div class="b-paging">
+      <a href="#" class="prev">&lt;</a>
+      <span>1</span>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <a href="#">6</a>
+      <a href="#">7</a>
+      <a href="#" class="next">&gt;</a>
+    </div>
+
+
   </div>
+
   <div class="column-right">
     <div class="b-right-banner">
       <%= render "layouts/like_box" %>

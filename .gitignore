@@ -9,4 +9,3 @@ Gemfile.lock
 public/articles/**/*
 public/albums/**/*
 public/album_images/**/*
-public/users/**/*

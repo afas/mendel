@@ -1,0 +1,30 @@
+<div class="column-left">
+  <h1>Добавление экспонатов</h1>
+
+
+
+  <div id="file-uploader">
+    <noscript>
+      <p>Please enable JavaScript to use file uploader.</p>
+    </noscript>
+  </div>
+
+  <script type="text/javascript">
+      function createUploader() {
+          var uploader = new qq.FileUploader({
+              element:document.getElementById('file-uploader'),
+              action:'/exhibits/upload',
+              debug:false,
+              sizeLimit:20 * 1024 * 1024,
+              minSizeLimit:0,
+              allowedExtensions:['jpg', 'jpeg', 'png'],
+              params:{
+                  authenticity_token:'<%= form_authenticity_token %>'
+              }
+          });
+      }
+      createUploader();
+  </script>
+
+</div>
+<div class="clear"></div>

@@ -30,4 +30,13 @@ class Album < ActiveRecord::Base
     end
   end
 
+  def previous
+    Album.where("id > ?", id).last
+  end
+
+  def next
+    Album.where("id < ?", id).first
+  end
+
+
 end

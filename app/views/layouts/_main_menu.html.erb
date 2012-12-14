@@ -11,12 +11,6 @@
                 <%= link_to category.title, "/#{category.short_url}" %>
               </li>
           <% end %>
-
-          <% if can?(:create, @categories) %>
-              <li>
-                <%= link_to(t('helpers.submit.create', :model => t('activerecord.models.category')), new_category_path) %>
-              </li>
-          <% end %>
         </ul>
       </div>
     </div>
@@ -37,35 +31,25 @@
       </div>
     </div>
   </li>
-  <li>
-    <a class="top-menu-item" href="/community">Сообщество</a>
-    <span class="divider">/</span>
+  <% @menu_statics.each do |static| %>
+      <li>
+        <%= link_to static.title, "/#{static.short_url}", :class => "top-menu-item" %>
+        <%= raw '<span class="divider">/</span>' if static != @menu_statics.last %>
 
-    <div class="sub-top-menu">
-      <div class="sub-top-menu-inner">
-        <ul>
-          <li><a href="/">Блоги</a></li>
-          <li><a href="/">Кафедры</a></li>
-          <li><a href="/">Преподаватели</a></li>
-        </ul>
-      </div>
-    </div>
-  </li>
-  <li class="last">
-    <a class="top-menu-item" href="/press/about">Газета</a>
+        <% if static.statics.size > 0 %>
+            <div class="sub-top-menu">
+              <div class="sub-top-menu-inner">
+                <ul>
+                  <% static.statics.each do |second_level| %>
+                      <li><%= link_to second_level.title, "/#{static.short_url}/#{second_level.short_url}" %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+        <% end %>
+      </li>
+  <% end %>
 
-    <div class="sub-top-menu">
-      <div class="sub-top-menu-inner">
-        <ul>
-          <% @menu_statics.each do |static| %>
-              <li>
-                <%= link_to static.title, "/press/#{static.short_url}" %>
-              </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </li>
   <li class="logo-mendeleevec">
   </li>
 </ul>

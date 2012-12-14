@@ -5,14 +5,16 @@
       <%= link_to "Покинуть сайт", destroy_user_session_path, :method => :delete %>
   <% else %>
       <div class="auth">
-        <form action="/users/sign_in" method="post">
+        <form id="new_user" class="new_user" action="/users/sign_in" method="post" accept-charset="UTF-8">
+          <div style="margin:0;padding:0;display:inline">
+            <input type="hidden" value="✓" name="utf8">
+            <input type="hidden" value="<%= form_authenticity_token %>" name="authenticity_token">
+          </div>
+
           <fieldset>
             <input class="text placeholder" placeholder="email" id="user_email" type="email" name="user[email]"/>
             <input type="password" id="q-pass" class="password placeholder" placeholder="Password" name="user[password]"/>
-            <!--<label for="user_remember_me">Remember me</label>-->
-            <!--<input type="hidden" value="0" name="user[remember_me]">-->
-            <!--<input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">-->
-            <input type="submit" class="submit wf-button" value="Войти"/>
+            <input type="submit" class="submit wf-button" name="commit" value="Войти"/>
           </fieldset>
         </form>
       </div>
@@ -21,7 +23,7 @@
 
 
   <div class="search">
-    <form action="/search/" method="get" >
+    <form action="/search/" method="get">
       <fieldset>
         <input type="text" id="q_search" name="q_search" class="text placeholder" placeholder="Искать на сайте"/>
         <input type="submit" class="submit wf-button" value="&rarr;"/>

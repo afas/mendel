@@ -1,0 +1,35 @@
+<div class="body">
+  <% if can?(:manage, :all) %>
+      <ul class="second-top-menu admin-menu">
+        <li><%= link_to(t('helpers.submit.create', :model => t('activerecord.models.company')), new_company_path) %></li>
+      </ul>
+  <% end %>
+
+  <div class="column-left">
+    <div class="b-news-all">
+      <% @companies.each do |company| %>
+          <dl class="b-news-long">
+            <dt>
+              <%= link_to image_tag(company.logo.url(:list)), company %>
+            </dt>
+            <dd>
+              <h3><%= company.name %></h3>
+
+              <p>
+                <%= company.description %>
+              </p>
+            </dd>
+          </dl>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+
+  </div>
+
+  <div class="column-right">
+    <div class="b-right-banner">
+      <%= render "layouts/like_box" %>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>

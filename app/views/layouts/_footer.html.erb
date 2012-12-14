@@ -1,5 +1,5 @@
 <div class="footer">
-  <h3><span>Site Map</span></h3>
+  <h3><span>Карта сайта</span></h3>
   <ul class="bottom-menu">
     <li>
       <a href="/news" class="top-level">Новости</a>
@@ -21,28 +21,24 @@
         <% end %>
       </ul>
     </li>
-    <li>
-      <a href="/community" class="top-level">Сообщество</a>
-      <ul>
-        <li><a href="/">Блоги</a></li>
-        <li><a href="/">Кафедры</a></li>
-        <li><a href="/">Преподаватели</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="/press" class="top-level">Газета</a>
-      <ul>
-        <li><a href="#">О проекте</a></li>
-        <li><a href="#">История</a></li>
-        <li><a href="#">Архив</a></li>
-        <li><a href="#">Контакты</a></li>
-      </ul>
-    </li>
+    <% @menu_statics.each do |static| %>
+        <li>
+          <%= link_to static.title, "/#{static.short_url}", :class => "top-level" %>
+
+          <% if static.statics.size > 0 %>
+              <ul>
+                <% static.statics.each do |second_level| %>
+                    <li><%= link_to second_level.title, "/#{static.short_url}/#{second_level.short_url}" %></li>
+                <% end %>
+              </ul>
+          <% end %>
+        </li>
+    <% end %>
+
   </ul>
   <div class="copyright">
-    <!--<a class="logo-bottom" href="#" title="На главную"><img src="/images/logo-bottom.png" width="56" height="84" alt="World Fashion"/></a>-->
-
-    <p>&copy; 1929 - 2011, Менделеевец. РХТУ им. Д.И. Менделеева.</p>
+    <%= link_to "В начало", "#", :class => "logo-bottom", :title => "На главную" %>
+    <p>&copy; 1929 - 2012, Менделеевец. РХТУ им. Д.И. Менделеева.</p>
   </div>
 </div>
 
@@ -50,7 +46,7 @@
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-25713460-1']);
     _gaq.push(['_trackPageview']);
-    (function() {
+    (function () {
         var ga = document.createElement('script');
         ga.type = 'text/javascript';
         ga.async = true;

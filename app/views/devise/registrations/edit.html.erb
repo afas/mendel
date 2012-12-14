@@ -1,72 +1,70 @@
-<h2>Профиль пользователя</h2>
+<div class="body">
+  <div class="column-left">
+    <h2>Личный кабинет <%= current_user.email %></h2><br/>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true}) do |f| %>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
-    <%= devise_error_messages! %>
+        <%= devise_error_messages! %>
 
-    <% if @user.avatar_file_name? %>
-        <%= image_tag @user.avatar.url(:medium) %>
+        <% if current_user.avatar_file_name? %>
+            <%= image_tag current_user.avatar.url(:medium) %>
+            <br/>
+        <% end %>
+
+        <div>
+        <%= f.label :avatar %>
+        <br/>
+        <%= f.file_field :avatar %></div>
+
+        <div><%= f.label :name %>
+          <br/>
+          <%= f.text_field :name %></div>
+
+        <div><%= f.label :secondname %>
+          <br/>
+          <%= f.text_field :secondname %></div>
+
+        <div><%= f.label :surname %>
+          <br/>
+          <%= f.text_field :surname %></div>
+
+        <div><%= f.label :faculty %>
+          <br/>
+          <%= f.collection_select :faculty, Faculty.collection, :cut, :name %></div>
+
+        <div><%= f.label :course %>
+          <br/>
+          <%= f.number_field :course %></div>
+
+        <div><%= f.label :about %>
+          <br/>
+          <%= f.text_area :about, :rows => 5 %></div>
+
+        <div><%= f.label :email %>
+          <br/>
+          <%= f.email_field :email %></div>
+
+        <div><%= f.label :password %> <i>(заполняется только в случае смены пароля)</i><br/>
+          <%= f.password_field :password, :autocomplete => "off" %></div>
+
+        <div><%= f.label :password_confirmation %>
+          <br/>
+          <%= f.password_field :password_confirmation %></div>
+
+        <div><%= f.label :current_password %> <i>(укажите для применения внесенных изменений)</i><br/>
+          <%= f.password_field :current_password %></div>
+
+        <div><%= f.submit "Update" %></div>
     <% end %>
 
-    <div class="field">
-      <%= f.label "Аватар" %>
-      <br/>
-      <%= f.file_field :avatar %>
+    <h3>Удаление аккаунта</h3>
+
+    <p>Unhappy? <%= link_to "Удалить мой уккаунт", registration_path(resource_name), :data => {:confirm => "Вы уверены?))"}, :method => :delete %>
+      .</p>
+  </div>
+  <div class="column-right">
+    <div class="b-right-banner">
+      <%= render "layouts/like_box" %>
     </div>
-
-    <div>
-      <%= f.label "Имя" %>
-      <br/>
-      <%= f.text_field :name %>
-    </div>
-
-    <div>
-      <%= f.label "Отчество" %>
-      <br/>
-      <%= f.text_field :secondname %>
-    </div>
-
-    <div>
-      <%= f.label "Фамилия" %>
-      <br/>
-      <%= f.text_field :surname %>
-    </div>
-
-
-    <div>
-      <%= f.label "Факультет" %>
-      <br/>
-      <%= f.collection_select(:faculty, Faculty.collection(), :cut, :name, :prompt => true) %>
-    </div>
-
-    <div>
-      <%= f.label "Курс" %>
-      <br/>
-      <%= f.collection_select(:course, Course.collection(), :cut, :name, :prompt => true) %>
-    </div>
-
-    <div>
-      <%= f.label "Мои интересы, призвание" %>
-      <br/>
-      <%= f.text_area :about, :rows => 8, :cols => 55 %>
-    </div>
-
-    <div><%= f.label :email %>
-      <br/>
-      <%= f.email_field :email %></div>
-
-    <div><%= f.label :password %> <i>(Если хотите изменить пароль - введите новый)</i><br/>
-      <%= f.password_field :password %></div>
-
-    <div><%= f.label :password_confirmation %>
-      <br/>
-      <%= f.password_field :password_confirmation %></div>
-
-    <div><%= f.label :current_password %> <i>(введите для сохранения изменений в профиле)</i><br/>
-      <%= f.password_field :current_password %></div>
-
-    <div><%= f.submit "Сохранить изменения" %></div>
-<% end %>
-
-<!--:name, :secondname, :surname, :faculty, :kafedra, :course, :about,:avatar-->
-
-<%= link_to "Back", :back %>
+  </div>
+  <div class="clear"></div>
+</div>

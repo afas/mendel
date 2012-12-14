@@ -11,7 +11,7 @@
 # была возможность минимальной локализации приложения на русский язык.
 
 ru:
-  site_name: "Официальный ресурс газеты &laquo;Менделеевец&raquo;"
+  site_name: "Газета &laquo;Менделеевец&raquo; РХТУ им. Д.И. Менделеева"
 
   time:
     formats:
@@ -41,6 +41,8 @@ ru:
 
   helpers:
     submit:
+      edit: "Изменить %{model}"
+      destroy: "Удалить %{model}"
       create: "Создать %{model}"
       update: "Сохранить %{model}"
       submit: "Сохранить %{model}"
@@ -65,9 +67,12 @@ ru:
       article: "Новость"
       category: "Категория"
       album: "Фото альбом"
+      exhibit: "Экспонат"
     models:
       user: "пользователя"
       article: "новость"
+      exhibit: "экспонат"
+      company: "компанию"
       category: "категорию"
       album: "фото альбом"
     attributes:

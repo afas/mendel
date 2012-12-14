@@ -1,0 +1,28 @@
+<%= form_for(@exhibit) do |f| %>
+    <%= render 'shared/error_messages', :target => @exhibit %>
+
+    <div class="field">
+      <%= image_tag @exhibit.image.url(:big) %>
+    </div>
+    <div class="field">
+      <%= f.label :title %>
+      <br/>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="field">
+      <%= f.label :description %>
+      <br/>
+      <%= f.text_area :description %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
+
+
+<script language="javascript">
+    $(document).ready(function () {
+        $("#exhibit_description").markItUp(mySettings);
+    })
+</script>

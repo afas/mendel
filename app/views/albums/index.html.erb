@@ -8,8 +8,29 @@
         </li>
     <% end %>
   </ul>
+
+  <% if can?(:manage, :all) %>
+      <ul class="second-top-menu admin-menu">
+        <li><%= link_to(t('helpers.submit.create', :model => t('activerecord.models.album')), new_album_path) if can?(:create, @albums) %>
+          /
+        </li>
+        <li><%= link_to(t('helpers.submit.create', :model => t('activerecord.models.category')), new_category_path) %>
+          <% unless @category.nil? %>
+              /</li>
+              <li><%= link_to(t('helpers.submit.edit', :model => t('activerecord.models.category')), edit_category_path(@category)) %>
+                /
+              </li>
+              <li><%= link_to(t('helpers.submit.destroy', :model => t('activerecord.models.category')), @category, :confirm => t('backend.actions.are_you_sure'), :method => :delete) %></li>
+          <% else %>
+              </li>
+          <% end %>
+          </ul>
+  <% end %>
+
+
+
   <div class="column-left">
-    <p><%= link_to(t('helpers.submit.create', :model => t('activerecord.models.album')), new_album_path) if can?(:create, @albums) %></p>
+    <p><%= %></p>
 
     <ul class="b-interview">
       <% @albums.each do |album| %>
@@ -22,10 +43,8 @@
               <p><%= album.short_description %></p>
 
               <div class="b-meta">
-                <!--<span class="section">Designer</span>-->
-                <%= link_to(t('backend.actions.edit'), edit_album_path(album)) if can?(:edit, album) %>
-                <%= link_to(t('backend.actions.destroy'), album, :confirm => t('backend.actions.are_you_sure'), :method => :delete) if can?(:destroy, album) %>
-                <%= link_to raw("<i></i>"), album, :class => "i-comments" %>
+                <span class="section"><%= album.category.title if album.category != nil? && action_name == "index" %></span>
+                <%= link_to raw("<i></i>"), "#{album_path(album)}#comments", :class => "i-comments" %>
               </div>
             </div>
           </li>

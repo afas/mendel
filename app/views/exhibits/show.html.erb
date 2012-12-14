@@ -1,0 +1,50 @@
+<div class="body">
+  <ul class="second-top-menu">
+    <% if @static.static_id.nil?
+         second_level = @static.statics
+       else
+         second_level = @static.static.statics
+       end
+
+       second_level.each do |static| %>
+        <li class="<%= 'active' if static == @static %>">
+          <%= link_to static.title, "/#{static.static.short_url}/#{static.short_url}" %>
+          <%= "/" if static != second_level.last %>
+        </li>
+    <% end %>
+  </ul>
+
+  <% if can?(:manage, :all) %>
+      <ul class="second-top-menu admin-menu">
+        <li><%= link_to(t('backend.actions.edit'), edit_exhibit_path(@exhibit)) %> /</li>
+        <li><%= link_to(t('backend.actions.destroy'), @exhibit, :confirm => t('backend.actions.are_you_sure'), :method => :delete) %></li>
+      </ul>
+  <% end %>
+
+  <div class="column-left">
+    <h1><%= @exhibit.title %>
+        <span>
+            <%= link_to raw("&#9668;"), exhibit_path(@exhibit.previous), :title => "Предыдущий экспонат" unless @exhibit.previous.nil? %>
+            <%= link_to raw("&#9658;"), exhibit_path(@exhibit.next), :title => "Следующий экспонат" unless @exhibit.next.nil? %>
+        </span>
+    </h1>
+
+
+    <p>
+      <%= image_tag @exhibit.image.url(:big) %>
+    </p>
+
+    <p>
+      <%= raw @exhibit.description %>
+    </p>
+
+    <%= render "layouts/fb_comments" %>
+
+  </div>
+  <div class="column-right">
+    <div class="b-right-banner">
+      <%= render "layouts/like_box" %>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>

@@ -1,0 +1,88 @@
+<div class="body">
+
+  <ul class="second-top-menu">
+    <% if @static.static_id.nil?
+         second_level = @static.statics
+       else
+         second_level = @static.static.statics
+       end
+
+       second_level.each do |static| %>
+        <li class="<%= 'active' if static == @static %>">
+          <%= link_to static.title, "/#{static.static.short_url}/#{static.short_url}" %>
+          <%= "/" if static != second_level.last %>
+        </li>
+    <% end %>
+  </ul>
+
+
+  <% if can?(:manage, :all) %>
+      <ul class="second-top-menu admin-menu">
+        <li><%= link_to(t('helpers.submit.create', :model => t('activerecord.models.exhibit')), add_exhibitions_path) %></li>
+      </ul>
+  <% end %>
+
+  <div class="column-left">
+    <div class="b-news-all">
+      <% @exhibits.each_with_index do |exhibit, index| %>
+          <% if (index % 4 == 0) && index != 0 %>
+              <dl class="b-news-long b-news-super">
+                <dt>
+                  <%= link_to image_tag(exhibit.image.url(:big)), exhibit %>
+                </dt>
+                <dd>
+                  <h3><%= exhibit.title %></h3>
+
+                  <p>
+                    <%= exhibit.description %>
+                  </p>
+
+                  <div class="b-meta">
+                    <%= link_to raw("<i></i>"), "#{exhibit_path(exhibit)}#comments", :class => "i-comments" %>
+                  </div>
+                </dd>
+              </dl>
+          <% else %>
+              <dl class="b-news-long">
+                <dt>
+                  <%= link_to image_tag(exhibit.image.url(:list)), exhibit %>
+                </dt>
+                <dd>
+                  <h3><%= exhibit.title %></h3>
+
+                  <p>
+                    <%= strip_tags exhibit.description %>
+                  </p>
+
+                  <div class="b-meta">
+                    <%= link_to raw("<i></i>"), "#{exhibit_path(exhibit)}#comments", :class => "i-comments" %>
+                  </div>
+                </dd>
+              </dl>
+          <% end %>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+
+    <div class="b-paging">
+      <a href="#" class="prev">&lt;</a>
+      <span>1</span>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <a href="#">6</a>
+      <a href="#">7</a>
+      <a href="#" class="next">&gt;</a>
+    </div>
+
+
+  </div>
+
+  <div class="column-right">
+    <div class="b-right-banner">
+      <%= render "layouts/like_box" %>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>

@@ -9,6 +9,7 @@ class Ability
     else
       can :read, :all
       can :catalog, :all
+
 #      can :create, Comment
 #      can :update, Comment do |comment|
 #        comment.try(:user) == user || user.role?(:moderator)

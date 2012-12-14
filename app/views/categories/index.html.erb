@@ -7,8 +7,15 @@
         </li>
     <% end %>
   </ul>
+
+  <% if can?(:manage, :all) %>
+      <ul class="second-top-menu admin-menu">
+        <li><%= link_to(t('helpers.submit.create', :model => t('activerecord.models.article')), new_article_path) %> /</li>
+        <li><%= link_to(t('helpers.submit.create', :model => t('activerecord.models.category')), new_category_path) %></li>
+      </ul>
+  <% end %>
+
   <div class="column-left">
-    <%= link_to(t('helpers.submit.create', :model => t('activerecord.models.article')), new_article_path) if can?(:create, @articles) %>
     <div class="b-news-all">
       <% @articles.each_with_index do |article, index| %>
           <% if (index % 4 == 0) && index != 0 %>
@@ -24,7 +31,7 @@
                   </p>
 
                   <div class="b-meta">
-                    <%= link_to raw("<i></i>"), article, :class => "i-comments" %>
+                    <%= link_to raw("<i></i>"), "#{article_path(article)}#comments", :class => "i-comments" %>
                   </div>
                 </dd>
               </dl>
@@ -41,7 +48,7 @@
                   </p>
 
                   <div class="b-meta">
-                    <%= link_to raw("<i></i>"), article, :class => "i-comments" %>
+                    <%= link_to raw("<i></i>"), "#{article_path(article)}#comments", :class => "i-comments" %>
                   </div>
                 </dd>
               </dl>

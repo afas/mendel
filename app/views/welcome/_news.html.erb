@@ -13,7 +13,7 @@
           </p>
 
           <div class="b-meta">
-            <%= link_to raw("<i></i>"), article, :class => "i-comments" %>
+            <%= link_to raw("<i></i>"), "#{article_path(article)}#comments", :class => "i-comments" %>
           </div>
         </dd>
       </dl>

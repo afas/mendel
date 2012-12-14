@@ -1,0 +1,23 @@
+<%= title(t('exhibits.index.title')) %>
+
+<table>
+  <tr>
+    <th><%= t('activerecord.attributes.exhibit.title') %></th>
+    <th><%= t('activerecord.attributes.exhibit.description') %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @exhibits.each do |exhibit| %>
+  <tr>
+    <td><%= exhibit.title %></td>
+    <td><%= exhibit.description %></td>
+    <td><%= link_to(t('backend.actions.show'), exhibit) if can?(:show, exhibit) %></td>
+    <td><%= link_to(t('backend.actions.edit'), edit_exhibit_path(exhibit))  if can?(:edit, exhibit) %></td>
+    <td><%= link_to(t('backend.actions.destroy'), exhibit, :confirm => t('backend.actions.are_you_sure'), :method => :delete) if can?(:destroy, exhibit) %></td>
+  </tr>
+<% end %>
+</table>
+
+<p><%= link_to(t('helpers.submit.create', :model => t('activerecord.models.exhibit')), new_exhibit_path) if can?(:create, @exhibits) %></p>

@@ -1,4 +1,4 @@
-# encoding: utf-8
+#encoding: utf-8
 class Article < ActiveRecord::Base
 
   belongs_to :category
@@ -6,7 +6,7 @@ class Article < ActiveRecord::Base
 
   has_attached_file :preview,
                     :styles => {
-                        :small => '69x66#',
+                        :small => '106x103#',
                         :list => '226x162#',
                         :big => '478x300#',
                         :big_inner => '400x500>'
@@ -18,6 +18,15 @@ class Article < ActiveRecord::Base
   validates_attachment_content_type :preview, :content_type => ['image/jpeg', 'image/png'], :message => "Неверный формат файла изображения."
 
   default_scope order("id desc")
-  scope :to_index, where("to_index = ?", true).order("id DESC").limit(6)
+  scope :to_index, where("to_index = ?", true).order("id DESC").limit(5)
+
+  def previous
+    Article.where("id > ?", id).last
+  end
+
+  def next
+    Article.where("id < ?", id).first
+  end
+
 
 end
