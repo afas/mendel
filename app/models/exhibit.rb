@@ -6,8 +6,8 @@ class Exhibit < ActiveRecord::Base
                         :small => '69x66#',
                         :list => '226x162#',
                         :slider => '329x270#',
-                        :big => '726x726#',
-                        :big_inner => '400x500>'
+                        :big => '400x500#',
+                        :big_inner => '726x726>'
                     },
                     :default_url => "/exhibit_images/default.jpg",
                     :url => "/exhibit_images/:id/:style_:basename.:extension"
