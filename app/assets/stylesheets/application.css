@@ -2,5 +2,6 @@
  *= require fileuploader
  *= require markitup
  *= require markitup.skin
+ *= require jquery.fancybox
  *= require main
 */
