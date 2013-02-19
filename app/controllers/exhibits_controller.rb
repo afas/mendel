@@ -1,4 +1,6 @@
 class ExhibitsController < ApplicationController
+  load_and_authorize_resource
+
   #layout false
 
   def show

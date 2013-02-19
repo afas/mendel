@@ -16,8 +16,6 @@ class Company < ActiveRecord::Base
   default_scope order("company_order, id")
   scope :to_index, order( :order => 'random()').limit(9)
 
-
-
   def previous
     Company.where("company_order <= ? AND id < ?", company_order, id).last
   end

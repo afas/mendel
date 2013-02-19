@@ -1,10 +1,14 @@
 class MuseumController < ApplicationController
-  #load_and_authorize_resource
 
   # GET /albums
   # GET /albums.xml
   def index
-    @exhibits = Exhibit.all
+    if can?(:manage, :all)
+      @exhibits = Exhibit.all
+    else
+      @exhibits = Exhibit.approved
+    end
+
     @static = Static.find_by_short_url("museum")
     respond_to do |format|
       format.html # index.html.erb
