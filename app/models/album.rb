@@ -1,4 +1,6 @@
 class Album < ActiveRecord::Base
+  attr_accessible :user_id, :title, :preview, :short_description, :to_index, :category_id, :album_images
+
   validates :title, :presence => true
 
   has_attached_file :preview,

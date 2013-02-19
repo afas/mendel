@@ -1,6 +1,8 @@
 #encoding: utf-8
 class Article < ActiveRecord::Base
 
+  attr_accessible :user_id, :title, :preview, :category_id, :short_description, :to_index, :album_id, :content
+
   belongs_to :category
   belongs_to :album
 

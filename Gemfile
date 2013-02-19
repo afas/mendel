@@ -15,6 +15,8 @@ gem 'russian'
 gem 'sqlite3'
 gem 'will_paginate'
 
+gem 'libv8', '~> 3.11.8'
+
 gem 'therubyracer'
 gem 'execjs'
 

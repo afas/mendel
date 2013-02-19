@@ -1,4 +1,7 @@
 class AlbumImage < ActiveRecord::Base
+
+  attr_accessible :image
+
   has_attached_file :image,
                     :styles => {
                         :list => '170x100#',
